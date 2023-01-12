@@ -7,6 +7,7 @@ from pages.login import LoginPage
 
 def pytest_addoption(parser):
     parser.addoption('--settings', action='store')
+
 @pytest.fixture()
 def login_page(page: Page) -> LoginPage:
     return LoginPage(page)

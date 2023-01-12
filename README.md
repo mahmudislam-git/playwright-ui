@@ -15,4 +15,4 @@ setx BATCH_UI_PASSOWORD "password123"
 playWright codegen https://ecommerce-playground.lambdatest.io/
 
 ## Run test on qa env
-pytest --settings=settings_qa tests --headed --slowmo  12000
+(Don't use this, until implmentation completed) pytest --settings=settings_qa tests --headed --slowmo  12000

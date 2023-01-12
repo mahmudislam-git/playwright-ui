@@ -14,7 +14,7 @@ class CreateNewBatch:
         # self.status_list_box = page.locator("#status_list_box")
         # self.status_list_box = "#status_list_box"
         # self.job_description_input = page.locator("#job_description")
-        self.job_create_button = page.get_by_role(self, name="Create")
+        self.job_create_button = page.get_by_role("button", name="Create")
 
     def create_new_batch(self, job_item: str, desc: str, priority: str):
         self.page.select_option(self.job_list_box, label=job_item)
