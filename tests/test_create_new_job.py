@@ -8,6 +8,7 @@ from pages.login import LoginPage
 def test_create_new_batch(page: Page, login_page: LoginPage,
                           home_page: HomePage, create_new_batch_page: CreateNewBatch) -> None:
 
+    login_page.load()
     login_page.login()
     home_page.click_create_new_batch()
     create_new_batch_page.create_new_batch()
