@@ -6,21 +6,27 @@ class CreateNewBatch:
     def __init__(self, page: Page) -> None:
         self.page = page
         # self.job_list_box = page.locator("#joblist")
-        self.job_list_box = "select#joblist"
+        self.job_select_button = page.locator("#JobSelect")
+        self.job_items = page.locator("#JobSelect_window div")
         self.name_input = page.locator("#name")
-        self.description_input = page.locator("#description")
-        self.priority = page.locator("#priority")
+        self.description_input = page.locator("#Description")
+        self.priority = page.locator("#JobPriority")
         # self.status_list_box = page.locator("#status_list_box")
-        self.status_list_box = "#status_list_box"
-        self.job_description_input = page.locator("#job_description")
-        self.job_create_button = page.locator("#createbutton")
+        # self.status_list_box = "#status_list_box"
+        # self.job_description_input = page.locator("#job_description")
+        self.job_create_button = page.get_by_role(self, name="Create")
 
-    def create_new_batch(self, job_item: str, job_name: str, desc: str, priority: str, status: str, job_desc: str):
+    def create_new_batch(self, job_item: str, desc: str, priority: str):
         self.page.select_option(self.job_list_box, label=job_item)
-        job_name = job_name + get_current_date_time()
-        self.name_input.fill(job_name)
+
+        self.job_select_button.click()
+        self.job_items.filter(has_text=job_item).nth(1).click()
+
+        self.description_input.click()
         self.description_input.fill(desc)
+
+        self.priority.click()
         self.priority.fill(priority)
-        self.page.select_option(self.status_list_box, label=status)
-        self.job_description_input.fill(job_desc)
-        self.job_create_button.click()
+
+        self.job_create_button.nth(1).click()
+

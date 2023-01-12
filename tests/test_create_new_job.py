@@ -11,4 +11,4 @@ def test_create_new_batch(page: Page, login_page: LoginPage,
     login_page.load()
     login_page.login()
     home_page.click_create_new_batch()
-    create_new_batch_page.create_new_batch()
+    create_new_batch_page.create_new_batch("NYSOH_INT_RETURNED_MAIL", "Automated Testing", " 4")
