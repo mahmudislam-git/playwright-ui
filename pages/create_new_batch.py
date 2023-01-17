@@ -1,11 +1,8 @@
 from playwright.sync_api import Page
-from helper.utils import get_current_date_time
-
 
 class CreateNewBatch:
     def __init__(self, page: Page) -> None:
         self.page = page
-        # self.job_list_box = page.locator("#joblist")
         self.job_select_button = page.locator("#JobSelect")
         self.job_items = page.locator("#JobSelect_window div")
         self.name_input = page.locator("#name")
@@ -17,7 +14,6 @@ class CreateNewBatch:
         self.job_create_button = page.get_by_role("button", name="Create")
 
     def create_new_batch(self, job_item: str, desc: str, priority: str):
-        self.page.select_option(self.job_list_box, label=job_item)
 
         self.job_select_button.click()
         self.job_items.filter(has_text=job_item).nth(1).click()

@@ -1,18 +1,35 @@
-source venv/bin/activate
 
-## Install Browsers
-playwright install
+## Installation
+ ```
+pip install -r requirements. txt 
 
-## Set UI username and password for MacOS,Linux
-export BATCH_UI_USERNAME=kingofking
-export BATCH_UI_PASSOWORD=password123
+```
 
-## Set UI username and password for Windows
-setx BATCH_UI_USERNAME "kingofking"
-setx BATCH_UI_PASSOWORD "password123"
+## Set UI Username and Password
+### For MacOS or LinuxOS
+```
+export BATCH_UI_USERNAME=<Enter your UI username>
+export BATCH_UI_PASSOWORD=<Enter your UI password>
+```
+### For Windows
+```
+setx BATCH_UI_USERNAME "<Enter your UI username>"
+setx BATCH_UI_PASSOWORD "<Enter your UI password>"
+```
 
-## Record the code
-playWright codegen https://ecommerce-playground.lambdatest.io/
+## To Record Tests using Playwright
 
-## Run test on qa env
-(Don't use this, until implmentation completed) pytest --settings=settings_qa tests --headed --slowmo  12000
+```
+playWright codegen <your application url>
+
+```
+
+## Run the Tests
+
+```
+pytest --settings=settings_qa tests --headed --slowmo  12000
+
+```
+
+
+

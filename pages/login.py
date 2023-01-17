@@ -8,8 +8,7 @@ class LoginPage:
 
     def __init__(self, page: Page) -> None:
         self.page = page
-        # self.URL = settings.URL
-        self.URL = "http://yahoo.com"
+        self.URL = settings.URL
         self.username = os.environ.get('BATCH_UI_USERNAME')
         self.password = os.environ.get('BATCH_UI_PASSOWORD')
         self.username_input = page.locator('input[type="text"]')
