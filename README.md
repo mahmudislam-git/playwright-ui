@@ -35,7 +35,6 @@ pytest --settings=settings_qa tests --headed --slowmo  12000
 
 ```
 sqlite3 .pymon
-sqlite> .pymon on
 sqlite> select ITEM,ITEM_START_TIME,TOTAL_TIME ,USER_TIME,CPU_USAGE,MEM_USAGE from TEST_METRICS;
 
 ```
