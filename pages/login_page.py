@@ -11,15 +11,17 @@ class LoginPage:
         self.URL = settings.URL
         self.username = os.environ.get('BATCH_UI_USERNAME')
         self.password = os.environ.get('BATCH_UI_PASSOWORD')
-        self.username_input = page.locator('input[type="text"]')
-        self.password_input = page.locator('input[type="password"]')
-        self.login_button = page.get_by_role( "button", name="Login")
+        self.username_input = page.get_by_role("textbox",name="User ID")
+        self.password_input = page.get_by_label("Password")
+        self.login_button = page.get_by_role( "link", name="Login")
 
-    def load(self) -> None:
+    def launch_application(self) -> None:
         print(self.URL)
         self.page.goto(self.URL)
 
-    def login(self) -> None:
+    def login_into_application(self) -> None:
+
+        self.launch_application()
         self.username_input.click()
         self.username_input.fill(self.username)
 
