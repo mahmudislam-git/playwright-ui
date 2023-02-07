@@ -34,6 +34,8 @@ pytest --settings=settings_qa tests --headed --slowmo  12000
 ## Open the SQLite DB to fetch the resource monitoring data from pytest-monitor
 
 ```
+Documentation : https://pytest-monitor.readthedocs.io/en/latest/introduction.html#use-cases
+
 sqlite3 .pymon
 sqlite> select ITEM,ITEM_START_TIME,TOTAL_TIME ,USER_TIME,CPU_USAGE,MEM_USAGE from TEST_METRICS;
 
