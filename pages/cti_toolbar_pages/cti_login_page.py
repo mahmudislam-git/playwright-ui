@@ -1,10 +1,7 @@
 import os
-
 from playwright.sync_api import Page
 from simple_settings import settings
-
-
-class LoginPage:
+class CtiLoginPage:
 
     def __init__(self, page: Page) -> None:
         self.page = page
@@ -15,13 +12,12 @@ class LoginPage:
         self.password_input = page.get_by_label("Password")
         self.login_button = page.get_by_role( "link", name="Login")
 
-    def launch_application(self) -> None:
+    def login_into_application(self) -> None:
         print(self.URL)
         self.page.goto(self.URL)
 
-    def login_into_application(self) -> None:
-
         self.launch_application()
+        self.username_input.wait_for()
         self.username_input.click()
         self.username_input.fill(self.username)
 

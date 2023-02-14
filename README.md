@@ -24,9 +24,20 @@ playWright codegen <your application url>
 
 ```
 
-## Run the Tests
+## Run the Tests with pytest-monitoring tool enabled 
 
 ```
+pytest --settings=settings_qa tests --headed --slowmo  12000
+
+```
+
+## Run the Tests with monitoring tool enabled 
+
+```
+cd /playwright-ui
+
+~/playwright-ui/venv/bin/python ~/utils/cpu_memory_monitoring.py
+
 pytest --settings=settings_qa tests --headed --slowmo  12000
 
 ```
