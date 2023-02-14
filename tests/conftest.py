@@ -3,9 +3,6 @@ from playwright.sync_api import Page
 
 from pages.cti_toolbar_pages.cti_login_page import CtiLoginPage
 from pages.cti_toolbar_pages.cti_toolbar_page import CtiToolbarPage
-from pages.sauce_demo_pages.sauce_home_page import SauceHomePage
-from pages.sauce_demo_pages.sauce_login_page import SauceLoginPage
-
 
 def pytest_addoption(parser):
     parser.addoption('--settings', action='store')
