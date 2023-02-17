@@ -1,6 +1,10 @@
 import os
+import time
+
 from playwright.sync_api import Page
 from simple_settings import settings
+
+
 class CtiLoginPage:
 
     def __init__(self, page: Page) -> None:
@@ -14,9 +18,11 @@ class CtiLoginPage:
 
     def login_into_application(self) -> None:
         print(self.URL)
+        print(self.username)
+        print(self.password)
         self.page.goto(self.URL)
 
-        self.launch_application()
+        time.sleep(60000)
         self.username_input.wait_for()
         self.username_input.click()
         self.username_input.fill(self.username)

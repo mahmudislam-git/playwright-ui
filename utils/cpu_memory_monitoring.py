@@ -11,7 +11,9 @@ while True:
         processFlag = True
         while processFlag:
             for proc in psutil.process_iter():
-                if proc.name() == 'Chromium':
+                process = psutil.Process(proc.pid)
+                if 'Chromium' in process.name():
+                ##if proc.name() == 'Chromium':
                     try:
                         pinfo = proc.as_dict(attrs=['pid'])
                     except psutil.NoSuchProcess:

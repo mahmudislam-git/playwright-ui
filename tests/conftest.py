@@ -8,9 +8,9 @@ def pytest_addoption(parser):
     parser.addoption('--settings', action='store')
 
 @pytest.fixture()
-def cit_login_page(page: Page) -> CtiLoginPage:
+def cti_login_page(page: Page) -> CtiLoginPage:
     return CtiLoginPage(page)
 
 @pytest.fixture()
-def cit_login_page(page: Page) -> CtiToolbarPage:
+def cti_tool_bar_page(page: Page) -> CtiToolbarPage:
     return CtiToolbarPage(page)
