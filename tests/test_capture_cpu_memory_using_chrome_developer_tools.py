@@ -1,13 +1,5 @@
 
-import psutil
-import pytest
 from playwright.sync_api import Playwright, Page, Browser, BrowserContext
-
-
-# @pytest.fixture(scope="module")
-# def playwright():
-#     with Playwright() as playwright:
-#         yield playwright
 
 
 def test_browser_memory_cpu_usage(playwright: Playwright):
@@ -18,8 +10,8 @@ def test_browser_memory_cpu_usage(playwright: Playwright):
     with context:
         page = context.new_page()
         client = page.context.new_cdp_session(page)
-        #client.send('Performance.enable')
-        client.send('Profiler.enable')
+        client.send('Performance.enable')
+        #client.send('Profiler.enable')
         page.goto("https://www.saucedemo.com/")
         page.locator("[data-test=\"username\"]").click()
         page.locator("[data-test=\"username\"]").fill("standar_user")
@@ -44,28 +36,10 @@ def test_browser_memory_cpu_usage(playwright: Playwright):
         page.locator("#shopping_cart_container a").click()
         page.locator("[data-test=\"continue-shopping\"]").click()
         # ---------------------
-        #context.close()
-        #browser.close()
-        # Run some actions on the page
-        #performanceMetrics = client.send('Performance.getMetrics')
-        #print("print performance metrics")
-        #print(performanceMetrics)
 
-        profilerData = client.send('Profiler.getBestEffortCoverage')
+        performanceMetrics = client.send('Performance.getMetrics')
         print("print performance metrics")
-        print(profilerData)
-    # Get the browser process ID and create a process object
-    # pid = browser.process.pid
-    # process = psutil.Process(pid)
-
-    # Get CPU and memory usage of the browser process
-    # cpu_percent = process.cpu_percent()
-    # memory_info = process.memory_info()
-    # memory_mb = memory_info.rss / (1024 * 1024)
-    #
-    # # Print the CPU and memory usage
-    # print(f"Browser CPU usage: {cpu_percent}%")
-    # print(f"Browser memory usage: {memory_mb} MB")
-
+        print(performanceMetrics)
     # Close the browser
     browser.close()
+
