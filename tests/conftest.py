@@ -3,6 +3,8 @@ from playwright.sync_api import Page
 
 from pages.cti_toolbar_pages.cti_login_page import CtiLoginPage
 from pages.cti_toolbar_pages.cti_toolbar_page import CtiToolbarPage
+from utils.twilio.make_call import MakeCall
+
 
 def pytest_addoption(parser):
     parser.addoption('--settings', action='store')
@@ -14,3 +16,7 @@ def cti_login_page(page: Page) -> CtiLoginPage:
 @pytest.fixture()
 def cti_tool_bar_page(page: Page) -> CtiToolbarPage:
     return CtiToolbarPage(page)
+
+@pytest.fixture()
+def make_call() -> MakeCall:
+    return MakeCall()
