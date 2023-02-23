@@ -38,8 +38,20 @@ def test_browser_memory_cpu_usage(playwright: Playwright):
         # ---------------------
 
         performanceMetrics = client.send('Performance.getMetrics')
-        print("print performance metrics")
+        print("print performance metrics from chrome developer tool")
         print(performanceMetrics)
+        metrics = page.evaluate("window.performance.timing")
+        print('metrics', metrics)
+        cpu_usage = (metrics['domInteractive'] - metrics['navigationStart']) / 1000
+        print('cpu usage', cpu_usage)
+
+        # Retrieve Memory Usage
+        res = None
+        for sub in performanceMetrics['metrics']:
+            if sub['name'] == "JSHeapUsedSize":
+                res = sub
+        print('memory_usage', res['value'])
+
     # Close the browser
     browser.close()
 
