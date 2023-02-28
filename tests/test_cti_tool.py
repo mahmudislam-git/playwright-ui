@@ -1,5 +1,6 @@
 from playwright.sync_api import Playwright, Page, Browser, BrowserContext
 
+
 def test_cti(playwright: Playwright):
     browser_type = playwright.chromium
     browser = browser_type.launch(headless=False)
@@ -9,7 +10,7 @@ def test_cti(playwright: Playwright):
         page = context.new_page()
         client = page.context.new_cdp_session(page)
         client.send('Performance.enable')
-        #client.send('Profiler.enable')
+        # client.send('Profiler.enable')
         page.goto("<enter your url here>")
         page.get_by_role("textbox", name="User ID").click()
         page.get_by_role("textbox", name="User ID").fill("<enter user id>")
@@ -24,7 +25,14 @@ def test_cti(playwright: Playwright):
 
         page.frame_locator("iframe").get_by_role("heading", name="Available").get_by_text("Available").click()
         page.frame_locator("iframe").get_by_role("link", name="On Queue").click()
-        page.frame_locator("iframe").locator("gef-pickup-control").get_by_role("button").click()
+
+        # Customer call via twilio
+        for x in range(10):
+            ## Add here step to call twilio
+            if page.frame_locator("iframe").get_by_role("link", name="On Queue").is_enabled():
+                page.frame_locator("iframe").locator("gef-pickup-control").get_by_role("button").click()
+            ## Check twilio call is in-progress and wait
+
         page.locator("#s_1_1_78_0_icon").click()
         page.locator("#ui-id-448").click()
         page.locator("#s_1_1_80_0_icon").click()
@@ -62,4 +70,3 @@ def test_cti(playwright: Playwright):
     # Close the browser
     context.close()
     browser.close()
-
