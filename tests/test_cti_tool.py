@@ -29,7 +29,7 @@ def test_cti(playwright: Playwright):
         # Customer call via twilio
         for x in range(10):
             ## Add here step to call twilio
-            if page.frame_locator("iframe").get_by_role("link", name="On Queue").is_enabled():
+            if page.frame_locator("iframe").locator("gef-pickup-control").get_by_role("button").is_enabled():
                 page.frame_locator("iframe").locator("gef-pickup-control").get_by_role("button").click()
             ## Check twilio call is in-progress and wait
 
