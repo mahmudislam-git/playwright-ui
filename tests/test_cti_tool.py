@@ -1,7 +1,15 @@
+import os
+import time
+
 from playwright.sync_api import Playwright, Page, Browser, BrowserContext
 
+from utils.twilio.twilio_make_call import CTI
 
-def test_cti(playwright: Playwright):
+
+def test_cti(playwright: Playwright, twilio_make_call: CTI):
+    twiml = "https://handler.twilio.com/twiml/EHc80d560fe35c83e0ac79286d3052c7af"
+    to_phone_number = os.environ.get('TO_PHONE_NUMBER')
+
     browser_type = playwright.chromium
     browser = browser_type.launch(headless=False)
     context = browser.new_context()
@@ -28,27 +36,31 @@ def test_cti(playwright: Playwright):
 
         # Customer call via twilio
         for x in range(10):
-            ## Add here step to call twilio
+            # Make CTI call using twilio
+            call_sid = twilio_make_call.make_the_call(to_phone_number, twiml)
             if page.frame_locator("iframe").locator("gef-pickup-control").get_by_role("button").is_enabled():
                 page.frame_locator("iframe").locator("gef-pickup-control").get_by_role("button").click()
-            ## Check twilio call is in-progress and wait
+            # END CTI twilio call
+            time.sleep(40)
+            twilio_make_call.end_the_call(call_sid, twiml)
 
-        page.locator("#s_1_1_78_0_icon").click()
-        page.locator("#ui-id-448").click()
-        page.locator("#s_1_1_80_0_icon").click()
-        page.locator("#ui-id-540").click()
-        page.locator("#s_1_1_12_0_icon").click()
-        page.locator("#ui-id-652").click()
-        page.get_by_role("button", name="Service Request:<b>GO</b>").click()
-        page.get_by_role("button", name="Text Referral").click()
-        page.frame_locator("iframe >> nth=1").locator("gef-disconnect-control").get_by_role("button").click()
-        page.get_by_role("button", name="OK").click()
-        page.get_by_role("button", name="Service Request:Call Wrap Up").click()
-        page.locator("#ui-id-2098").click()
-        page.get_by_role("cell", name="No: How else may I assist you today?Select Cancel").locator("div").click()
-        page.get_by_role("button", name="Hide").click()
-        page.get_by_role("button", name="Call Wrap Up:OK").click()
-        page.get_by_role("button", name="Show").click()
+            # Wrap the call details
+            page.locator("#s_1_1_78_0_icon").click()
+            page.locator("#ui-id-448").click()
+            page.locator("#s_1_1_80_0_icon").click()
+            page.locator("#ui-id-540").click()
+            page.locator("#s_1_1_12_0_icon").click()
+            page.locator("#ui-id-652").click()
+            page.get_by_role("button", name="Service Request:<b>GO</b>").click()
+            page.get_by_role("button", name="Text Referral").click()
+            page.frame_locator("iframe >> nth=1").locator("gef-disconnect-control").get_by_role("button").click()
+            page.get_by_role("button", name="OK").click()
+            page.get_by_role("button", name="Service Request:Call Wrap Up").click()
+            page.locator("#ui-id-2098").click()
+            page.get_by_role("cell", name="No: How else may I assist you today?Select Cancel").locator("div").click()
+            page.get_by_role("button", name="Hide").click()
+            page.get_by_role("button", name="Call Wrap Up:OK").click()
+            page.get_by_role("button", name="Show").click()
 
         # ---------------------
 
