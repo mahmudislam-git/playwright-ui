@@ -16,15 +16,19 @@ def test_cti(playwright: Playwright, twilio_make_call: CTI):
 
     with context:
         page = context.new_page()
+
         client = page.context.new_cdp_session(page)
         client.send('Performance.enable')
-        # client.send('Profiler.enable')
+
+        # Application Navigation
         page.goto("<enter your url here>")
+
         page.get_by_role("textbox", name="User ID").click()
         page.get_by_role("textbox", name="User ID").fill("<enter user id>")
         page.get_by_label("Password").click()
         page.get_by_label("Password").fill("<enter password>")
         page.get_by_role("link", name="Login").click()
+
 
         with page.expect_popup() as page1_info:
             page.get_by_role("menuitem", name="CTI Toolbar").click()
