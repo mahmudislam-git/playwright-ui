@@ -15,6 +15,11 @@ export BATCH_UI_PASSOWORD=<Enter your UI password>
 ```
 setx BATCH_UI_USERNAME "<Enter your UI username>"
 setx BATCH_UI_PASSOWORD "<Enter your UI password>"
+
+setx TWILIO_ACCOUNT_SID "twilio_account_sid"
+setx TWILIO_AUTH_TOKEN "twilio auth token"
+setx FROM_TWILIO_PHONE_NUMBER "from twilio phone number" 
+setx TO_PHONE_NUMBER "receiver phone number" 
 ```
 
 ## To Record Tests using Playwright
